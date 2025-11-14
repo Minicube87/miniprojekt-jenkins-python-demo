@@ -1,10 +1,16 @@
 pipeline{
     agent any
-    
+
     stages{
         stage("Clean before build"){
             steps{
                 sh "rm -rf ./*"
+            }
+        }
+
+        stage('Checkout') {
+            steps {
+                checkout scm
             }
         }
 
