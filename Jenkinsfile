@@ -27,10 +27,12 @@ pipeline{
             }
         }
 
-        stage("Show results")
+        stage("Show results"){
             steps{
                 sh 'cat results.txt'
             }
+        }    
+
     }
     post{
         always{
