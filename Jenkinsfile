@@ -20,11 +20,14 @@ pipeline{
             }
         }
 
+        // DOcker container sind isolierte dh 
+        // todo workspace ordner verknüpfen
+        // bei args irgentwie
         stage("Setup dockercontainer"){
             agent {
                 docker {
                     image 'python:3.10' 
-                    args '-u'
+                    args '-v ./:./'
                 }
             }
             steps{
