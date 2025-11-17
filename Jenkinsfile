@@ -20,9 +20,6 @@ pipeline{
             }
         }
 
-        // DOcker container sind isolierte dh 
-        // todo workspace ordner verknüpfen
-        // bei args irgentwie
         stage("Setup dockercontainer"){
             agent {
                 docker {
@@ -31,6 +28,7 @@ pipeline{
                 }
             }
             steps{
+                sh './prepare.sh'
                 sh 'python calc.py'
             }
         }
