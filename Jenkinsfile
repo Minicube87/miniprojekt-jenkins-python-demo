@@ -24,16 +24,17 @@ pipeline{
         // todo workspace ordner verknüpfen
         // bei args irgentwie
         stage("Setup dockercontainer"){
-            steps {
-            sh"""
-                docker run --rm \
-                -v "$WORKSPACE":/app \
-                -w /app \
-                python:3.10 \
-                python calc.py
-            """
+            agent {
+                docker {
+                    image 'python:3.10' 
+                    args '-v ${pwd()}:/'
+                }
+            }
+            steps{
+                sh 'python calc.py'
             }
         }
+
         stage("Show results"){
             steps{
                 sh 'cat results.txt'
