@@ -17,6 +17,7 @@ pipeline{
         stage("Execute shell script"){
             steps{
                 sh './prepare.sh'
+                stash name: 'numbers', includes: 'numbers.txt'
             }
         }
 
@@ -24,17 +25,18 @@ pipeline{
             agent {
                 docker {
                     image 'python:3' 
-                    args "-v $WORKSPACE:/workspace -w /workspace"
                 }
             }
             steps{
-                sh './prepare.sh'
+                unstash 'numbers'
                 sh 'python calc.py'
+                stash name: 'result', includes: 'result.txt'
             }
         }
 
         stage("Show results"){
             steps{
+                unstash 'result'
                 sh 'cat result.txt'
             }
         }    
