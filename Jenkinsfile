@@ -26,7 +26,7 @@ pipeline{
         stage("Setup dockercontainer"){
             agent {
                 docker {
-                    image 'python:3.10' 
+                    image 'python:latest' 
                     args '$WORKSPACE:/workspace -w /workspace'
                 }
             }
