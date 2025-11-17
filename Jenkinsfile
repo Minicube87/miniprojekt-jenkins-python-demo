@@ -26,8 +26,7 @@ pipeline{
         stage("Setup dockercontainer"){
             agent {
                 docker {
-                    image 'python:latest' 
-                    args '$WORKSPACE:/workspace -w /workspace'
+                    image 'python:3' 
                 }
             }
             steps{
@@ -37,7 +36,7 @@ pipeline{
 
         stage("Show results"){
             steps{
-                sh 'cat results.txt'
+                sh 'cat result.txt'
             }
         }    
 
